@@ -3,14 +3,28 @@
  * Имеет свойство URL, равно пустой строке.
  * */
 class Entity {
-
+  
+  constructor() {
+    this.URL = '';
+  }
+  
   /**
    * Запрашивает с сервера список данных.
    * Это могут быть счета или доходы/расходы
    * (в зависимости от того, что наследуется от Entity)
    * */
-  static list( data, callback = f => f ) {
 
+  // было так. Это же для примера?
+  //static list( data, callback = f => f ) {
+  static list( data, callback) {
+    const listObject = {
+      url: this.URL,
+      responseType: 'JSON',
+      data: data,
+      method: 'GET',
+      callback: callback,
+    };
+    return createRequest(listObject);
   }
 
   /**

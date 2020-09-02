@@ -1,9 +1,10 @@
-/**
+/*
  * Основная функция для совершения запросов
  * на сервер.
+ *
  * */
 
- /*
+ /* *** Пример запроса ***
 const xhrSendAnswer = new XMLHttpRequest();
 xhrSendAnswer.open('POST', 'https://netology-slow-rest.herokuapp.com/poll.php');
 xhrSendAnswer.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -15,10 +16,33 @@ xhrSendAnswer.addEventListener('readystatechange', () => {
 });
 
 xhrSendAnswer.send(`vote=${questionID}&answer=${answerId}`);
+*/
 
+/*
+url: 'https://example.com', // адрес
+headers: { // произвольные заголовки, могут отсутствовать
+      'Content-type': 'application/json' 
+    },
+data: { // произвольные данные, могут отсутствовать
+      email: 'ivan@poselok.ru',
+      password: 'odinodin'
+    },
+responseType: 'json', // формат, в котором необходимо выдать результат
+method: 'GET', // метод запроса
+
+callback: (err, response) => {
+    console.log( 'Ошибка, если есть', err );
+    console.log( 'Данные, если нет ошибки', response );
+  }
+
+    Функция, которая сработает после запроса.
+    Если в процессе запроса произойдёт ошибка, её объект
+    должен быть в параметре err.
+    Если в запросе есть данные, они должны быть переданы в response.
 */
 
 
+// Из оригинального кода
 // options = {}
 
 const createRequest = (options) => {
@@ -51,6 +75,8 @@ const createRequest = (options) => {
             }
     
         });
+
+        xhr.send(formData);
     
         return xhr;
     } catch (e) {

@@ -43,7 +43,13 @@ class User {
    * User.setCurrent.
    * */
   static login( data, callback = f => f ) {
-
+    createRequest({
+      method: 'POST',
+      url: this.URL + '/login',
+      data: data,
+      responseType: 'JSON',
+      callback: callback
+    })
   }
 
   /**
@@ -53,7 +59,7 @@ class User {
    * User.setCurrent.
    * */
   static register( data, callback = f => f ) {
-
+  
   }
 
   /**
