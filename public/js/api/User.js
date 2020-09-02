@@ -42,7 +42,7 @@ class User {
    * сохранить пользователя через метод
    * User.setCurrent.
    * */
-  static login( data, callback = f => f ) {
+  static login(data, callback) {
     createRequest({
       method: 'POST',
       url: this.URL + '/login',
