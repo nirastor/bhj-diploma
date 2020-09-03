@@ -17,7 +17,7 @@ class AsyncForm {
       throw new Error('Not a form')
     }
     this.element = element;
-    registerEvents();
+    this.registerEvents();
   }
 
   /**
@@ -26,7 +26,7 @@ class AsyncForm {
    * */
   registerEvents() {
     this.element.addEventListener('submit', (e) => {
-      e.preventPefault();
+      e.preventDefault();
       this.submit();
     });
   }
@@ -39,11 +39,16 @@ class AsyncForm {
    * }
    * */
   getData() {
-    return new FormData (this.element);
+    const formData = new FormData(this.element);
+    const formDataObject = {}
+    for (let item of formData) {
+      formDataObject[item[0]] = item[1];
+    }
+    return formDataObject;
   }
 
   onSubmit( options ) {
-  
+
   }
 
   /**
@@ -51,6 +56,7 @@ class AsyncForm {
    * данные, полученные из метода getData()
    * */
   submit() {
-    this.onSubmit( this.getData() );
+    // Тут в задании лишняя просьба обернуть еще в объект. Достаточно так.
+    this.onSubmit(this.getData());
   }
 }

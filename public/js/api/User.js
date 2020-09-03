@@ -4,6 +4,14 @@
  * Имеет свойство URL, равное '/user'.
  * */
 class User {
+  
+  // А как все-таки правильно
+  // constructor() {
+  //   this.URL = '/user';
+  // }
+
+  static URL = '/user';
+
   /**
    * Устанавливает текущего пользователя в
    * локальном хранилище.
@@ -43,13 +51,20 @@ class User {
    * User.setCurrent.
    * */
   static login(data, callback) {
-    createRequest({
+    console.log('user.login - start');
+        
+    const dataForRequest = {
       method: 'POST',
       url: this.URL + '/login',
       data: data,
       responseType: 'JSON',
       callback: callback
-    })
+    }
+
+    console.log(dataForRequest);
+
+    createRequest(dataForRequest);
+    console.log('user.login - end');
   }
 
   /**

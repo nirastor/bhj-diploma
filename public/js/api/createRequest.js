@@ -49,15 +49,17 @@ const createRequest = (options) => {
     try {
         const xhr = new XMLHttpRequest();
         const url = options.url;
-        const formData = new FormData; 
+        const formData = new FormData(); 
     
         if (options.method === 'GET') {
-            for (attribute in options.data) {
+            for (let attribute in options.data) {
                 url += `&${attribute}=${options.data[attribute]}`
             }
             url = url.replace('&', '?');
         } else {
-            formData.append(attribute, data[attribute]);
+            for (let attribute in options.data) {
+                formData.append(attribute, options.data[attribute])
+            }
         }
     
         if (options.headers) {
@@ -71,7 +73,7 @@ const createRequest = (options) => {
         
         xhr.addEventListener('readystatechange', () => {
             if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                options.callback(null, xhr.responseText);
+                options.callback(null, JSON.parse(xhr.response));
             }
     
         });
