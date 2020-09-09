@@ -29,8 +29,8 @@ class Modal {
    * */
   registerEvents() {
     this.closers.forEach(closer => {
-      closer.addEventListener('click', () => {
-        this.onClose(closer);
+      closer.addEventListener('click', (e) => {
+        this.onClose(e);
       });
     });
   }
@@ -40,9 +40,7 @@ class Modal {
    * Закрывает текущее окно (Modal.close())
    * */
   onClose(e) {
-    // *** Question ***
-    // *** ERR *** e.preventDefault is not a function ***
-    // e.preventDefault(); 
+    e.preventDefault(); 
     this.close();
     this.unregisterEvents();
   }

@@ -13,7 +13,12 @@ class AccountsWidget {
    * необходимо выкинуть ошибку.
    * */
   constructor( element ) {
+    if (!element) {
+      throw new Error ('Элемент не найден')
+    }
 
+    this.element = element;
+    this.registerEvents();
   }
 
   /**
@@ -24,7 +29,10 @@ class AccountsWidget {
    * вызывает AccountsWidget.onSelectAccount()
    * */
   registerEvents() {
-
+    const elCreateAccountButton = this.element.querySelector('.pull-right');
+    elCreateAccountButton.addEventListener('click', () => {
+      App.getModal('createAccount').open();
+    });
   }
 
   /**

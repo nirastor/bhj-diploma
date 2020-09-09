@@ -4,9 +4,7 @@
  * */
 class Entity {
   
-  constructor() {
-    this.URL = '';
-  }
+  static URL = '';
   
   /**
    * Запрашивает с сервера список данных.
@@ -14,17 +12,8 @@ class Entity {
    * (в зависимости от того, что наследуется от Entity)
    * */
 
-  // было так. Это же для примера?
-  //static list( data, callback = f => f ) {
   static list( data, callback) {
-    const listObject = {
-      url: this.URL,
-      responseType: 'JSON',
-      data: data,
-      method: 'GET',
-      callback: callback,
-    };
-    return createRequest(listObject);
+  
   }
 
   /**
@@ -32,8 +21,14 @@ class Entity {
    * на сервер. (в зависимости от того,
    * что наследуется от Entity)
    * */
-  static create( data, callback = f => f ) {
-
+  static create(data, callback) {
+    createRequest({
+      method: 'POST',
+      url: this.URL,
+      data: Object.assign({ _method: 'PUT' }, data ),
+      responseType: 'JSON',
+      callback: callback,
+    });
   }
 
   /**
