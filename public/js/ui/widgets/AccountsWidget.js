@@ -19,6 +19,7 @@ class AccountsWidget {
 
     this.element = element;
     this.registerEvents();
+    this.update();
   }
 
   /**
@@ -46,7 +47,15 @@ class AccountsWidget {
    * метода renderItem()
    * */
   update() {
+    console.log('вызов account.update');
+    console.log( 'User current в момент вызова аккаунт-апдейт', User.current() )
+    if (User.current()) {
+      Account.list( User.current(), (err, response) => {
+        console.log('Акаунт-лист ошибка:', err);
+        console.log('Акаунт-лист ответ', response);
+      });
 
+    }
   }
 
   /**

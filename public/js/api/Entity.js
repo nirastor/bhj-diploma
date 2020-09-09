@@ -13,7 +13,13 @@ class Entity {
    * */
 
   static list( data, callback) {
-  
+    createRequest({
+      method: 'GET',
+      url: this.URL,
+      data: data,
+      responseType: 'JSON',
+      callback: callback
+    });
   }
 
   /**
@@ -35,16 +41,28 @@ class Entity {
    * Получает информацию о счёте или доходе/расходе
    * (в зависимости от того, что наследуется от Entity)
    * */
-  static get( id = '', data, callback = f => f ) {
-
+  static get( id = '', data, callback) {
+    createRequest({
+      method: 'GET',
+      url: this.URL + '/' + id,
+      data: data,
+      responseType: 'JSON',
+      callback: callback,
+    });
   }
 
   /**
    * Удаляет информацию о счёте или доходе/расходе
    * (в зависимости от того, что наследуется от Entity)
    * */
-  static remove( id = '', data, callback = f => f ) {
-
+  static remove( id = '', data, callback) {
+    createRequest({
+      method: 'POST',
+      url: this.URL + '/' + id,
+      data: Object.assign({ _method: 'DELETE' }, data ),
+      responseType: 'JSON',
+      callback: callback,
+    });
   }
 }
 
